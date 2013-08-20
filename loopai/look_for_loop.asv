@@ -1,0 +1,36 @@
+function [ loops ] = look_for_loop( input_matrix, i, loop_length, varargin )
+%UNTITLED2 Summary of this function goes here
+%   Detailed explanation goes here
+    if size(varargin) > 0
+        path = varargin(1);
+    else
+        path = i;
+    end
+    [m,n] = size(path);
+    vertexes = [];
+    if loop_length >= 0
+        for j = 1:m
+            if input_matrix(i,path(j,n)) > 0
+                input_matrix(i,path(j,n)) = input_matrix(i,path(j,n)) - 1;
+                input_matrix(path(j,n),i) = input_matrix(path(j,n), i) - 1;
+                vertexes(size(vertexes)+1,1) = j;
+            end
+        end
+    j = 0;
+    pathes = [];
+    for vertex = vertexes
+        j = j + 1;
+        pathes(j,:) = path(1,:);
+    end
+    pathes(:,n+1) = vertexes;
+    [a,b] = size(pathes);
+    loops = [];
+    for j = 1:a
+        some_loops = look_for_loop(input_matrix, pathes(j,b), loop_length - 1, pathes(l,:));
+        [c,d] = size(some_loops);
+        for k = 1:c
+            
+        end
+    end
+end
+
